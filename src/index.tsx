@@ -1,40 +1,49 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {observable} from 'mobx';
-import {observer} from 'mobx-react';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 
-class AppState {
-    @observable timer = 0;
+import './Styles/Styles.css';
 
-    constructor() {
-        setInterval(() => {
-            this.timer += 1;
-        }, 1000);
-    }
+import Todo from './Todo/';
 
-    resetTimer() {
-        this.timer = 0;
-    }
-}
+ReactDOM.render(
+    <div>
+        <Todo /> 
+        <DevTools />
+    </div>,    
+    document.getElementById('root')
+);
 
-@observer
-class TimerView extends React.Component<{appState: AppState}, {}> {
-    render() {
-        return (
-            <div>
-                <button onClick={this.onReset}>
-                    Seconds passed: {this.props.appState.timer}
-                </button>
-                <DevTools />
-            </div>
-        );
-     }
+// class AppState {
+//     @observable timer = 0;
 
-     onReset = () => {
-         this.props.appState.resetTimer();
-     }
-};
+//     constructor() {
+//         setInterval(() => {
+//             this.timer += 1;
+//         }, 1000);
+//     }
 
-const appState = new AppState();
-ReactDOM.render(<TimerView appState={appState} />, document.getElementById('root'));
+//     resetTimer() {
+//         this.timer = 0;
+//     }
+// }
+
+// @observer
+// class TimerView extends React.Component<{appState: AppState}, {}> {
+//     render() {
+//         return (
+//             <div>
+//                 <button onClick={this.onReset}>
+//                     Seconds passed: {this.props.appState.timer}
+//                 </button>
+//                 <DevTools />
+//             </div>
+//         );
+//      }
+
+//      onReset = () => {
+//          this.props.appState.resetTimer();
+//      }
+// };
